@@ -41,15 +41,12 @@ class Reservation(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     event_id = Column(Integer, ForeignKey("events.id"))
-    seat_id = Column(
-        Integer, ForeignKey("seats.id"), unique=True
-    )  # Ensures a seat can only be reserved once
+    seat_id = Column(Integer, ForeignKey("seats.id"), unique=True)
     user_name = Column(String)
 
     event = relationship("Event")
     seat = relationship("Seat")
 
-    # Unique constraint to prevent duplicate seat reservations
     __table_args__ = (UniqueConstraint("seat_id", name="unique_seat_reservation"),)
 
 

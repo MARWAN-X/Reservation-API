@@ -2,7 +2,7 @@ from database import SessionLocal, Event, Seat
 
 db = SessionLocal()
 
-# Clear existing data (optional)
+# Clear existing data
 db.query(Seat).delete()
 db.query(Event).delete()
 db.commit()

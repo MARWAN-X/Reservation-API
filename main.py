@@ -58,7 +58,7 @@ def reserve_seat(
     # Check if the event exists
     event = db.query(Event).filter(Event.id == event_id).first()
     if not event:
-        raise HTTPException(status_code=404, detail="Event not found")  # ✅ FIXED
+        raise HTTPException(status_code=404, detail="Event not found")
 
     # Check if the seat exists
     seat = (
@@ -67,7 +67,7 @@ def reserve_seat(
         .first()
     )
     if not seat:
-        raise HTTPException(status_code=404, detail="Seat not found")  # ✅ FIXED
+        raise HTTPException(status_code=404, detail="Seat not found")
 
     # Check if the seat is already reserved
     if seat.is_reserved:
@@ -76,7 +76,7 @@ def reserve_seat(
     try:
         # Reserve the seat
         seat.is_reserved = True
-        db.commit()  # Commit early to prevent race conditions
+        db.commit()
 
         # Create the reservation
         reservation = Reservation(
